@@ -51,7 +51,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         with:
           commit_message:  ${{ env.TODAY_DATE }} upload notion pages
-          branch: main
+          branch: master
           commit_user_name: NaayoungKwon
           commit_user_email: kny8092@gmail.com
           commit_author: NaayoungKwon <kny8092@gmail.com>
@@ -64,7 +64,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: main
+          ref: master
           fetch-depth: 1
           # submodules: true
           # If using the 'assets' git submodule from Chirpy Starter, uncomment above

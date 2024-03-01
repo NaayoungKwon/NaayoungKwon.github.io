@@ -45,7 +45,8 @@ permalink: /java-spring/{}/
 
 toc: true
 toc_sticky: true
----''';
+---
+''';
 
     # 파일이 이미 존재하지 않으면 생성
     if not os.path.exists(file_path):

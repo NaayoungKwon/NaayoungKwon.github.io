@@ -29,15 +29,29 @@ for entry in feed.entries:
     file_name = file_name.replace('\\', '-')  # 백슬래시를 대시로 대체
     # 필요에 따라 추가 문자 대체
     pub_date = entry.published_parsed
-    month = pub_date[1] if int(pub_date[1]) >= 10 : '0' + pub_date[1]
-    file_name = pub_date[0] + '-' + month + '-' + pub_date[2] + [-] + file_name +'.md'
+    month = pub_date[1] if int(pub_date[1]) >= 10 else '0' + pub_date[1]
+    date = pub_date[0] + '-' + month + '-' + pub_date[2]
+    
+    file_name = date + [-] + file_name +'.md'
     file_path = os.path.join(posts_dir, file_name)
-    print(file_name)
-    print(entry.published)
+    print(file_name,entry.published, date )
+
+    header = '''---
+date: {}
+title: "{}"
+category :
+  - Java & Spring
+permalink: /java-spring/{}/
+
+toc: true
+toc_sticky: true
+---''';
+
     # 파일이 이미 존재하지 않으면 생성
     if not os.path.exists(file_path):
         with open(file_path, 'w', encoding='utf-8') as file:
-            file.write(entry.description)  # 글 내용을 파일에 작성
+            content = header.format(date, entry.title, entry.title ) + entry.description
+            file.write(content)  # 글 내용을 파일에 작성
 
         # 깃허브 커밋
         repo.git.add(file_path)

@@ -21,6 +21,14 @@ function escapeCodeBlock(input) {
 // passing notion client to the option
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
+const category_map = {
+  "effective-java" : "Effective Java",
+  "unit-test" : "Unit Test",
+  "etc" : "ETC",
+  "java-spring" : "Java & Spring",
+  "modern-javascript" : "Modern JavaScript",
+  "real-mysql" : "Real MySQL",
+}
 (async () => {
   // ensure directory exists
   const root = "_posts";
@@ -64,7 +72,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
     // categories
     let cats = r.properties?.["카테고리"]?.["select"]?.["name"];
     if (!cats) {
-      cats  = 'ETC';
+      cats  = 'etc';
     }
 
     // frontmatter
@@ -79,7 +87,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
     }
     if(cats){
       fmcats += "\ncategories:\n  - ";
-      fmcats += cats;
+      fmcats += category_map[cats];
     }
     const title_link = title.replace(/ /g, "-")
     const tags_for_excerpt = tags.length > 0 ? "\nexcerpt: " + tags.join() : ""

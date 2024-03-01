@@ -2,12 +2,14 @@
 date: 2024-02-19
 title: "MySQL의 InnoDB가 MVCC를 구현하는 법"
 category :
-  - Java & Spring
-permalink: /java-spring/MySQL의 InnoDB가 MVCC를 구현하는 법/
+  - Real MySQL
+permalink: /real-mysql/MySQL의 InnoDB가 MVCC를 구현하는 법/
 
 toc: true
 toc_sticky: true
----<h3 id="들어가기-전에">들어가기 전에</h3>
+---
+
+<h3 id="들어가기-전에">들어가기 전에</h3>
 <p>DBMS의 격리성 수준은 알고있었으나 내부적으로 어떻게 동작하는지는 알지 못했다.
 데드락 문제를 마주하면서 기본은 알고있어야 나중에 트러블 슈팅하기 수월할 것 같아서 MySQL 책을 구매했다.</p>
 <p>우선 MySQL이 어떤 구조로 되어있는지 간략하게 알아보고, 어디서 트랜잭션과 격리 수준을 보장하는 메커니즘이 돌아가는지 설명한다.

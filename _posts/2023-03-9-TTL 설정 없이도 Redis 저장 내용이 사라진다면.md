@@ -2,12 +2,14 @@
 date: 2023-03-9
 title: "TTL 설정 없이도 Redis 저장 내용이 사라진다면"
 category :
-  - Java & Spring
-permalink: /java-spring/TTL 설정 없이도 Redis 저장 내용이 사라진다면/
+  - Wealth Marble
+permalink: /wealth-marble/TTL 설정 없이도 Redis 저장 내용이 사라진다면/
 
 toc: true
 toc_sticky: true
----<p><img alt="" src="https://velog.velcdn.com/images/kny8092/post/1ab5e216-20ad-43cc-92f4-183e13d10b42/image.png" /></p>
+---
+
+<p><img alt="" src="https://velog.velcdn.com/images/kny8092/post/1ab5e216-20ad-43cc-92f4-183e13d10b42/image.png" /></p>
 <p>분명히 로컬에서 Test 했을 때는 정상적으로 동작했고, 배포 된 서버에 요청을 보냈을 때 Redis에 원하는 값이 저장되는 것을 확인했다.
 그런데.. 몇 시간뒤나 다음날 다시 테스트하려고 하면 자꾸 캐싱해둔 내용이 사라져있다...
 초면인 backup1 ~ backup4가 있다...

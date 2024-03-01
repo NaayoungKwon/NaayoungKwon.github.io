@@ -7,7 +7,9 @@ permalink: /java-spring/Java Stream 알고 쓰기/
 
 toc: true
 toc_sticky: true
----<blockquote>
+---
+
+<blockquote>
 <p>Java8 부터 지원한 stream을 사용하면서 filter, map, flatMap, collect가 어떤 기능을 위해 쓰는지는 필요에 의해 검색해가며 알긴 했지만, stream에 대해 궁금증이 생겼을 때 일단 동작하니 넘겼던 지난날의 근본없음을 반성하는 마음으로 공부해보게 되었다.</p>
 </blockquote>
 <p>Modern JAVA In Action의 Chapter 4 ~ 6을 보며 새롭게 알게된 내용을 정리했다.</p>

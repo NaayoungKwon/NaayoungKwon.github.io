@@ -7,7 +7,9 @@ permalink: /java-spring/비동기와 Reactive Programming의 연결고리/
 
 toc: true
 toc_sticky: true
----<blockquote>
+---
+
+<blockquote>
 <p>Mono, Flux를 사용하면서 리액티브라는 용어를 정확히 알고있다고 생각하지 않아, 기본 개념부터 하나 씩 이해해보려고 한다.
 JS를 할때는 V8 engine이 어떻게 이벤트 루프를 처리하는지 등의 내용을 읽어봤는데, Java의 동작 방식은 잘 나와있지 않아 이에대한 궁금증도 풀어보려한다.</p>
 </blockquote>

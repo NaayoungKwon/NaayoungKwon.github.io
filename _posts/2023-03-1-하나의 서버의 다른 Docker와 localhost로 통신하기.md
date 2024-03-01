@@ -2,12 +2,13 @@
 date: 2023-03-1
 title: "하나의 서버의 다른 Docker와 localhost로 통신하기"
 category :
-  - Java & Spring
-permalink: /java-spring/하나의 서버의 다른 Docker와 localhost로 통신하기/
+  - ETC
+permalink: /etc/하나의 서버의 다른 Docker와 localhost로 통신하기/
 
 toc: true
 toc_sticky: true
----<h3 id="문제점">문제점</h3>
+---
+<h3 id="문제점">문제점</h3>
 <p>EC2에서 kafka와 spring socket server간의 통신을 설정하면서
 로컬에서 localhost:29092로 broker 주소를 설정해 잘 동작했으나, server를 docker로 이미지화 하여 배포 시, localhost가 docker 내부에만 갇혀 통신을 하지 못하는 상황이 발생했다.</p>
 <h3 id="시도했으나-안된-것">시도했으나 안된 것</h3>

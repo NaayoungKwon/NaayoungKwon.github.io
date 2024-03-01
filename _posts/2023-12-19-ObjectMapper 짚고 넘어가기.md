@@ -7,7 +7,9 @@ permalink: /java-spring/ObjectMapper 짚고 넘어가기/
 
 toc: true
 toc_sticky: true
----<h2 id="알고-있던-것">알고 있던 것</h2>
+---
+
+<h2 id="알고-있던-것">알고 있던 것</h2>
 <p>직렬화/역직렬화를 할 때 사용해왔고, 필요한 경우에는 검색으로 짧게 이해하고 사용하거나 팀 repository에 적용된 코드를 참고하면서 사용해왔었다.
 이번 기회에 찬찬히 읽어보고 정리하는 시간을 가졌다.</p>
 <blockquote>

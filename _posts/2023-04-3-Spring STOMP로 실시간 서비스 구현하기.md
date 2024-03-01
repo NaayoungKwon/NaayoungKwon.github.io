@@ -2,12 +2,13 @@
 date: 2023-04-3
 title: "Spring STOMP로 실시간 서비스 구현하기"
 category :
-  - Java & Spring
-permalink: /java-spring/Spring STOMP로 실시간 서비스 구현하기/
+  - Wealth Marble
+permalink: /wealth-marble/Spring STOMP로 실시간 서비스 구현하기/
 
 toc: true
 toc_sticky: true
----<h2 id="들어가기">들어가기</h2>
+---
+<h2 id="들어가기">들어가기</h2>
 <p>이 글은 java spring 프로젝트에서 websocket stomp 메세지를 전달하는 기능을 구현하기 위해 찾아본 사혼의 조각을 정리한 것이다.</p>
 <p>전체 코드는 진행 중인 spring 프로젝트 <a href="https://github.com/Eagle2gle/wealth-marble-backend">github</a>에 있다.
 Websocket은 알고있는 전제로 설명한다.</p>

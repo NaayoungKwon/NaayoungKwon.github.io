@@ -7,7 +7,9 @@ permalink: /java-spring/spring-boot-starter-web과 webflux를 동시에 사용�
 
 toc: true
 toc_sticky: true
----<blockquote>
+---
+
+<blockquote>
 <p>팀에서 개발하고있는 project가 spring-boot-starter-web, spring-boot-starter-webflux 둘 다 dependency에 추가 하고 사용하고 있어, 어떻게 돌아가는지 궁금해서 알아보기로 했다.</p>
 </blockquote>
 <h3 id="우선-application은">우선 Application은</h3>

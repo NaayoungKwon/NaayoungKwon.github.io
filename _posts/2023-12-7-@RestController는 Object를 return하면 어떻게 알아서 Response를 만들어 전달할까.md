@@ -7,7 +7,9 @@ permalink: /java-spring/@RestController는 Object를 return하면 어떻게 알�
 
 toc: true
 toc_sticky: true
----<h3 id="알고-있던-내용">알고 있던 내용</h3>
+---
+
+<h3 id="알고-있던-내용">알고 있던 내용</h3>
 <p>일반적으로 사용하는 방식은 다음과 같다.</p>
 <pre><code class="language-java">@RestController
 public class MyController{

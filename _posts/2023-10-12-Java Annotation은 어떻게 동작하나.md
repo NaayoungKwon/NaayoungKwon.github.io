@@ -7,7 +7,9 @@ permalink: /java-spring/Java Annotation은 어떻게 동작하나/
 
 toc: true
 toc_sticky: true
----<blockquote>
+---
+
+<blockquote>
 <p>로그 출력 시 이메일 등의 개인 정보를 * 로 masking 해야하는 경우가 생겼다. 이 때 masking을 직접 구현하지 않고도 쓸 수 있는 방법이 있을 것 같아 찾아보는 중 Custom Annotation을 알게되면서 Annotation을 더 알아보고싶다는 생각이 들었다.</p>
 </blockquote>
 <h3 id="내가-알고있는-annotation">내가 알고있는 Annotation</h3>

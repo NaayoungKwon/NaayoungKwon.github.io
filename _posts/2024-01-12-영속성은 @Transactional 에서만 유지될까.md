@@ -7,7 +7,9 @@ permalink: /java-spring/영속성은 @Transactional 에서만 유지될까/
 
 toc: true
 toc_sticky: true
----<h3 id="알고있었던-것">알고있었던 것</h3>
+---
+
+<h3 id="알고있었던-것">알고있었던 것</h3>
 <p>JPA에서 영속성 컨텍스트라고 하여 1차 캐시, 쓰기 지연, 변경 감지 등의 장점을 가지고 있다.
 쓰기 지연, 변경 감지는 트랜잭션을 커밋하면 엔티티 매니저에서 영속성 컨텍스트를 플러시하며 DB에 동기화하게 된다.</p>
 <p>Transaction 밖에서도 계속 변경 감지를 하는 것 처럼 select + update query가 발생해 찾아보던 중 OSIV에 대해 알게되었다.</p>

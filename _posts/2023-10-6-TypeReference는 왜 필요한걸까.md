@@ -7,7 +7,9 @@ permalink: /java-spring/TypeReference는 왜 필요한걸까/
 
 toc: true
 toc_sticky: true
----<blockquote>
+---
+
+<blockquote>
 <p>TypeReference 관련해서 찾아보다가 Generic 부터 제대로 알지 못하고 있다는 느낌을 받게 되었고, 기본적인 것 부터 다시 학습해보고 정리한다.</p>
 </blockquote>
 <h3 id="내가-알고있는-generic">내가 알고있는 Generic</h3>

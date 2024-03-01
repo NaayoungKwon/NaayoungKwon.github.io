@@ -2,8 +2,8 @@
 date: 2023-02-8
 title: "Kafka 1도 모르는 상태에서 Spring 연결하기"
 category :
-  - Java & Spring
-permalink: /java-spring/Kafka 1도 모르는 상태에서 Spring 연결하기/
+  - Wealth Marble
+permalink: /wealth-marble/Kafka 1도 모르는 상태에서 Spring 연결하기/
 
 toc: true
 toc_sticky: true

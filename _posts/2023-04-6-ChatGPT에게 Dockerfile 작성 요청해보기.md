@@ -2,12 +2,14 @@
 date: 2023-04-6
 title: "ChatGPT에게 Dockerfile 작성 요청해보기"
 category :
-  - Java & Spring
-permalink: /java-spring/ChatGPT에게 Dockerfile 작성 요청해보기/
+  - Wealth Marble
+permalink: /wealth-marble/ChatGPT에게 Dockerfile 작성 요청해보기/
 
 toc: true
 toc_sticky: true
----<h2 id="들어가기">들어가기</h2>
+---
+
+<h2 id="들어가기">들어가기</h2>
 <p>ChatGPT가 나오면서 사람들은 다양한 분야에서 ChatGPT를 사용하기 시작했다.
 나도 장난삼아 몇 번 써본적은 있지만 <del>(SSD 잘만드는 회사 추천해줘)</del>, 주변에서 코딩을 시켰더니 해주더라! 라는 이야기를 들었다.</p>
 <p>어려운 백준 문제의 정답도 구글링을 하면 대부분 찾을 수 있었고, 그렇다고 내가 하고있는 프로젝트 코드를 다 던져주고 어떤 부분을 작성해달라고 하는 것도 나의 학습에 도움이 되지않고 상세하게 요청하기 귀찮아서(?) 코딩을 시켜본 적이 없었다.</p>

@@ -1,13 +1,13 @@
 # main links
 main:
   - title: "Home"
-    url: https://choiiis.github.io/
+    url: https://naayoungkwon.github.io/
 
   - title: "About"
     url: /about/
 
   - title: "GitHub"
-    url: https://github.com/choiiis
+    url: https://github.com/naayoungkwon
 
   # - title: "Projects"
   #   url: /projects/
@@ -18,11 +18,21 @@ main:
 # sidebar navigation (categories)
 # 2022.02.15 sidebar update : simple ver.
 categories:
-  - title: "Categories1"
-    url: /categories/categories1/
-  - title: "Categories2"
-    url: /categories/categories2/
-  - title: "Categories3"
-    url: /categories/categories3/
-  - title: "Categories4"
-    url: /categories/categories4/
+  - title: "Project"
+    children:
+      - title: "Asnity"
+        url: /categories/asnity/
+      - title: "Wealth Marble"
+        url: /categories/wealth-marble/
+  - title: "Java & Spring"
+    url: /categories/java-pring/
+  - title: "Effective Java"
+    url: /categories/effective-java/
+  - title: "Real MySQL"
+    url: /categories/real-mysql/
+  - title: "Unit Test"
+    url: /categories/unit-test/
+  - title: "Modern JavaScript Deep Dive"
+    url: /categories/modern-javascript/
+  - title: "ETC"
+    url: /categories/etc/

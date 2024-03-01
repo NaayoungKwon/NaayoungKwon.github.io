@@ -83,7 +83,6 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
     }
     const title_link = title.replace(/ /g, "-")
     const fm = `---
-layout: post
 date: ${date}
 title: "${title}"${fmtags}${fmcats}
 

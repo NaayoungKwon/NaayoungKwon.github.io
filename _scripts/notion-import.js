@@ -11,11 +11,11 @@ const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 });
 
-function escapeCodeBlock(body) {
-  const regex = /```([\s\S]*?)```/g
-  return body.replace(regex, function(match, htmlBlock) {
-    return "{% raw %}\n```" + htmlBlock + "```\n{% endraw %}"
-  })
+function escapeCodeBlock(input) {
+  const regex = /\n([\s]*)```([\s\S]*?)```/g;
+  return input.replace(regex, function(match, leadingSpaces, codeBlock) {
+    return "\n{% raw %}" + leadingSpaces + "```" + codeBlock + "```\n{% endraw %}";
+  });
 }
 
 // passing notion client to the option
@@ -50,7 +50,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
     let title = id;
     let ptitle = r.properties?.["목차"]?.["title"];
     if (ptitle?.length > 0) {
-      title = ptitle[0]?.["plain_text"];
+      title = ptitle[0]?.["plain_text"].replace(/./g, '');
     }
     // tags
     let tags = [];

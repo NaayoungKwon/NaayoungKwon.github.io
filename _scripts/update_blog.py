@@ -32,7 +32,7 @@ for entry in feed.entries:
     month = pub_date[1] if int(pub_date[1]) >= 10 else '0' + pub_date[1]
     date = pub_date[0] + '-' + month + '-' + pub_date[2]
     
-    file_name = date + [-] + file_name +'.md'
+    file_name = date + '-' + file_name +'.md'
     file_path = os.path.join(posts_dir, file_name)
     print(file_name,entry.published, date )
 

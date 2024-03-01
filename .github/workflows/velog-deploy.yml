@@ -12,11 +12,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Push changes
-      run: |
-        git config --global user.name 'NaayoungKwon'
-        git config --global user.email 'kny8092@gmail.com'
-        git push https://NaayoungKwon:${{ secrets.GH_PAT }}@github.com/NaayoungKwon/NaayoungKwon.github.io.git
+    # - name: Push changes
+    #   run: |
+    #     git config --global user.name 'NaayoungKwon'
+    #     git config --global user.email 'kny8092@gmail.com'
+    #     git push https://NaayoungKwon:${{ secrets.GH_PAT }}@github.com/NaayoungKwon/NaayoungKwon.github.io.git
 
     - name: Set up Python
       uses: actions/setup-python@v2

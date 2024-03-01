@@ -50,7 +50,7 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
     let title = id;
     let ptitle = r.properties?.["목차"]?.["title"];
     if (ptitle?.length > 0) {
-      title = ptitle[0]?.["plain_text"].replace(/./g, '');
+      title = ptitle[0]?.["plain_text"].replaceAll('.', '-');
     }
     // tags
     let tags = [];

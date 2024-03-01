@@ -29,7 +29,7 @@ for entry in feed.entries:
     file_name = file_name.replace('\\', '-')  # 백슬래시를 대시로 대체
     # 필요에 따라 추가 문자 대체
     pub_date = entry.published_parsed
-    month = pub_date[1] if int(pub_date[1]) >= 10 else '0' + pub_date[1]
+    month = pub_date[1] if int(pub_date[1]) >= 10 else '0' + str(pub_date[1])
     date = pub_date[0] + '-' + month + '-' + pub_date[2]
     
     file_name = date + '-' + file_name +'.md'

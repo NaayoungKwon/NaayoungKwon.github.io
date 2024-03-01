@@ -28,7 +28,8 @@ const category_map = {
   "java-spring" : "Java & Spring",
   "modern-javascript" : "Modern JavaScript",
   "real-mysql" : "Real MySQL",
-}
+};
+
 (async () => {
   // ensure directory exists
   const root = "_posts";

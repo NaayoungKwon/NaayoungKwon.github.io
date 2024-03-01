@@ -82,9 +82,10 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
       fmcats += cats;
     }
     const title_link = title.replace(/ /g, "-")
+    const tags_for_excerpt = tags.length > 0 ? "\nexcerpt: " + tags.join() : ""
     const fm = `---
 date: ${date}
-title: "${title}"${fmtags}${fmcats}
+title: "${title}"${fmtags}${fmcats}${tags_for_excerpt}
 
 permalink: /${cats}/${title_link}/
 

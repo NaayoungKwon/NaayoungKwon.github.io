@@ -3,7 +3,11 @@ name: Update Blog Posts
 on:
   issue_comment:
     types: [created, edited]
-    
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  
 jobs:
   update_blog:
     runs-on: ubuntu-latest

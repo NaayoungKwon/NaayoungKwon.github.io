@@ -28,7 +28,9 @@ for entry in feed.entries:
     file_name = file_name.replace('/', '-')  # 슬래시를 대시로 대체
     file_name = file_name.replace('\\', '-')  # 백슬래시를 대시로 대체
     # 필요에 따라 추가 문자 대체
-    file_name += '.md'
+    pub_date = entry.published_parsed
+    month = pub_date[1] if int(pub_date[1]) >= 10 : '0' + pub_date[1]
+    file_name = pub_date[0] + '-' + month + '-' + pub_date[2] + [-] + file_name +'.md'
     file_path = os.path.join(posts_dir, file_name)
     print(file_name)
     print(entry.published)

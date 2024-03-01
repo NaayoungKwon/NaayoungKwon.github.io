@@ -5,5 +5,5 @@ permalink: /categories/asnity/
 author_profile: true
 taxonomy: Asnity
 sidebar:
-nav: "categories"
+  nav: "categories"
 ---

@@ -5,5 +5,5 @@ permalink: /categories/java-spring/
 author_profile: true
 taxonomy: Java & Spring
 sidebar:
-nav: "categories"
+  nav: "categories"
 ---

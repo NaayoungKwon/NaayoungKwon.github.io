@@ -5,5 +5,5 @@ permalink: /categories/effective-java/
 author_profile: true
 taxonomy: Effective Java
 sidebar:
-nav: "categories"
+  nav: "categories"
 ---

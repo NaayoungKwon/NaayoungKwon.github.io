@@ -2,7 +2,7 @@
 date: 2022-12-20
 title: "Socket Multi Namespace Connect 옳은가?"
 categories:
-  - undefined
+  - Asnity
 
 permalink: /asnity/Socket-Multi-Namespace-Connect-옳은가?/
 

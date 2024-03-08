@@ -28,6 +28,7 @@ const category_map = {
   "java-spring" : "Java & Spring",
   "modern-javascript" : "Modern JavaScript",
   "real-mysql" : "Real MySQL",
+  "asnity" : "Asnity"
 };
 
 (async () => {

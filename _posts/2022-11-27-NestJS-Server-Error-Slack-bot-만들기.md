@@ -2,10 +2,10 @@
 date: 2022-11-27
 title: "NestJS Server Error Slack bot 만들기"
 categories:
-  - undefined
+  - Asnity
 
 permalink: /asnity/NestJS-Server-Error-Slack-bot-만들기/
-
+excerpt : Error Slack bot으로 편하게 에러를 확인해 보자
 toc: true
 toc_sticky: true
 ---

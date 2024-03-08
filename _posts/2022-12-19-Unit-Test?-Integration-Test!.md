@@ -2,10 +2,10 @@
 date: 2022-12-19
 title: "Unit Test? Integration Test!"
 categories:
-  - undefined
+  - Asnity
 
 permalink: /asnity/Unit-Test?-Integration-Test!/
-
+excerpt: Unit Test가 무조건 최고인가
 toc: true
 toc_sticky: true
 ---

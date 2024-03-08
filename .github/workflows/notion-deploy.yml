@@ -16,21 +16,6 @@ concurrency:
 jobs:
   importer:
     runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@master
-    
-      - name: Clean Directory
-        run: |
-          for file in assets/img/*
-          do
-              if [[ $file != "assets/img/favicons" ]]
-              then
-                  rm -rf "$file"
-              fi
-          done
-          rm -rf _posts/*
-      
       - uses: actions/setup-node@v3
         with:
           node-version: "17"

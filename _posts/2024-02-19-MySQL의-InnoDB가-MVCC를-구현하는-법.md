@@ -4,7 +4,7 @@ title: "MySQL의 InnoDB가 MVCC를 구현하는 법"
 tags: [InnoDB, MVCC, lock, record lock, gap lock, undolog, ]
 categories:
   - Real MySQL
-excerpt: InnoDB,MVCC,lock,record lock,gap lock,undolog
+excerpt: DBMS의 격리성 수준은 알고있었으나 내부적으로 어떻게 동작하는지는 알지 못했다. 데드락 문제를 마주하면서 기본은 알고있어야 나중에 트러블 슈팅하기 수월할 것 같아서 MySQL 책을 구매했다.
 
 permalink: /real-mysql/MySQL의-InnoDB가-MVCC를-구현하는-법/
 

@@ -3,8 +3,8 @@ main:
   - title: "Home"
     url: https://naayoungkwon.github.io/
 
-  # - title: "About"
-  #   url: /about/
+  - title: "About"
+    url: /about/
 
   - title: "Categories"
     url: /categories/

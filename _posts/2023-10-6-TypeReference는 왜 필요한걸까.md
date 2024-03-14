@@ -61,6 +61,7 @@ toc_sticky: true
 ### Recursive type bound
 - 타입 매개 변수가 자신을 포함하는 수식에 의해 한정될 수 있다.
 - 다음 코드에서 첫 번째 함수는 T가 비교 가능한지 모르기 때문에 컴파일 에러가 발생한다.
+
 ```java
 public static <T> int countGreaterThan(T[] anArray, T elem) {
     int count = 0;
@@ -78,6 +79,7 @@ public static <T extends Comparable<T>> int countGreaterThan(T[] anArray, T elem
     return count;
 }
 ```
+
 ### Subtyping in generics
 
 - 매개변수화 타입은 무공변이기 때문에 `Price<Integer>` IS A `Price<Number>` 가 성립하지 않는다.
@@ -100,6 +102,7 @@ addPrice(new Price<Integer>(3)); // O
 - 단점 : 런타임 시점에 인스턴스를 생성해서 컴파일 시점에 해당 타입을 체크하기 어렵다.
 
 ### Class 클래스
+
 ```java
 // Class 객체를 얻는 방법
 Class<Price> clazz = Price.class; //class property를 사용한 방법

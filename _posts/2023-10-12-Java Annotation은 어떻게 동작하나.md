@@ -109,7 +109,7 @@ public @interface Box {
 
   public static void main(String[] args) {
 
-    Class&lt;Iphone&gt; iphoneClass = Iphone.class;
+    Class<Iphone> iphoneClass = Iphone.class;
     Annotation[] annotations = iphoneClass.getDeclaredAnnotations();
     for (Annotation annotation : annotations) {
       if (annotation instanceof Box) {
@@ -145,10 +145,10 @@ AbstractProcessor는 Processor Interface를 구현한다.</p>
 <h4 id="abstractprocessor">AbstractProcessor</h4>
 <p>AbstractProcessor가 구현해야하는 주요 메서드 4개에 대해서 간단히만 알아보자.</p>
 <pre><code class="language-java">public interface Processor {
-    Set&lt;String&gt; getSupportedAnnotationTypes();
+    Set<String> getSupportedAnnotationTypes();
     SourceVersion getSupportedSourceVersion();
     void init(ProcessingEnvironment processingEnv);
-    boolean process(Set&lt;? extends TypeElement&gt; annotations, RoundEnvironment roundEnv);
+    boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv);
 }</code></pre>
 <ul>
 <li><p>getSupportedAnnotationTypes : 어떤 annotation을 처리할 것인지 명시적으로 지정</p>
@@ -198,7 +198,7 @@ public class ChloeCustomGetterProcessor extends AbstractProcessor {
   }
 
   @Override
-  public boolean process(Set&lt;? extends TypeElement&gt; annotations, RoundEnvironment roundEnv) {
+  public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
     for (Element element : roundEnv.getElementsAnnotatedWith(ChloeCustomGetter.class)) {
       if (element instanceof VariableElement) {
         VariableElement field = (VariableElement) element;

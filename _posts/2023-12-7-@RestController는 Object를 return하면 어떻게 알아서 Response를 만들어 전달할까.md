@@ -26,9 +26,9 @@ public class MyController{
 public class MyController{
 
     @GetMapping("/")
-    public ResponseEntity&lt;Dto&gt; get(){
+    public ResponseEntity<Dto> get(){
         Dto result = service.get();
-        return new ResponseEntity&lt;&gt;(result, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
        }
 
     @ReponseBody
@@ -57,17 +57,17 @@ public class MyController{
 이때, @ResponseBody를 사용하거나 ResponseEntity를 전달하면 view Resolver 대신 <code>HttpMessageConverter</code>가 동작한다.</p>
 <h3 id="httpmessageconverter">HttpMessageConverter</h3>
 <p>HttpMessageConverter는 Interface로 아래와 같이 이루어져있다. </p>
-<pre><code class="language-java">public interface HttpMessageConverter&lt;T&gt; {
+<pre><code class="language-java">public interface HttpMessageConverter<T> {
 
     // RequestBody
-    boolean canRead(Class&lt;?&gt; clazz, @Nullable MediaType mediaType);
+    boolean canRead(Class<?> clazz, @Nullable MediaType mediaType);
 
     // ResponseBody로 return된 Class의 Type을 지원하는지, Http Accept media type을 지원하는지 확인
-    boolean canWrite(Class&lt;?&gt; clazz, @Nullable MediaType mediaType);
+    boolean canWrite(Class<?> clazz, @Nullable MediaType mediaType);
 
-    List&lt;MediaType&gt; getSupportedMediaTypes();
+    List<MediaType> getSupportedMediaTypes();
 
-    T read(Class&lt;? extends T&gt; clazz, HttpInputMessage inputMessage)
+    T read(Class<? extends T> clazz, HttpInputMessage inputMessage)
             throws IOException, HttpMessageNotReadableException;
 
     // MessageConverter를 통해 메세지를 쓰는 기능
@@ -79,7 +79,7 @@ public class MyController{
 <p>@RequestBody와 @ResponseBody 둘 다 사용하는데, canWrite는 message converter가 메세지를 쓸 수 있는지 확인해서 가능하면 write를 수행하도록 한다.
 해당 인터페이스의 구현체들은 여러 종류가 있고, 스프링 부스에서 우선순위에 따라 구현체가 canWrite를 만족하는지를 확인한다.
 <img alt="" src="https://velog.velcdn.com/images/kny8092/post/93a5796f-7c0c-4014-8dd6-658d819b51d9/image.png" /></p>
-<p>여기서 ByteArrayHttpMessageConverter -&gt; StringHttpMessageConverter -&gt; MappingJackson2HttpMessageConverter 순서로 확인하는데, return type이 Object 였다면 <code>MappingJackson2HttpMessageConverter</code> 를 MessaageConverter로 사용할 것이다.</p>
+<p>여기서 ByteArrayHttpMessageConverter -> StringHttpMessageConverter -> MappingJackson2HttpMessageConverter 순서로 확인하는데, return type이 Object 였다면 <code>MappingJackson2HttpMessageConverter</code> 를 MessaageConverter로 사용할 것이다.</p>
 <p><img alt="" src="https://velog.velcdn.com/images/kny8092/post/bc453ba8-9bad-4cc4-b6ce-e58bfed0cff2/image.png" /></p>
 <p>이때 어떤 MessaageConverter를 사용할 건지 확인해 호출하는 역할은 ReturnValueHandler에서 한다.</p>
 <h2 id="returnvaluehanlder">ReturnValueHanlder</h2>

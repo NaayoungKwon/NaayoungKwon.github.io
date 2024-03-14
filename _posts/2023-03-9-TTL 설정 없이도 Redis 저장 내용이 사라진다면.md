@@ -21,8 +21,8 @@ toc_sticky: true
 <p>처음에는 TTL설정 문제인줄 알고 Redis default TTL을 계속 찾아봤다.
 하지만 관련 문제는 아니였다.</p>
 <p>다음에 했던 것이 Redis에 어떤 command가 날라왔는지 조사를 했는데, 엄청 많은 요청이 계속 들어오고 있었다.</p>
-<pre><code class="language-shell">&gt; redis-cli
-&gt; monitor</code></pre>
+<pre><code class="language-shell">> redis-cli
+> monitor</code></pre>
 <img height="50%" src="https://velog.velcdn.com/images/kny8092/post/309d8b55-3815-4705-8cc0-60001ba94c5f/image.png" />
 
 

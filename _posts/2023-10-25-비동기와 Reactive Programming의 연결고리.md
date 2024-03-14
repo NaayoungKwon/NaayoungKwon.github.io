@@ -53,7 +53,7 @@ Mono, Flux API를 사용하면 요청을 Non blocking으로 활용할 수 있다
 <ul>
 <li><code>spring-web</code> module은 Spring-Webflux에 기본이 되는 reactive foundation (HTTP 추상화, Reactive Stream adapter)를 가지고 있다.</li>
 <li>Spring Webflux는 두 가지 프로그래밍 모델을 지원한다.<ul>
-<li>Annotated Controllers : spring mvc와 동일하게 spring-web module에 있는 같은 annotation을 사용하며, mvc/webflux 둘을 구분하기가 어렵다. -&gt; 우리가 주로 사용하고 있는 것</li>
+<li>Annotated Controllers : spring mvc와 동일하게 spring-web module에 있는 같은 annotation을 사용하며, mvc/webflux 둘을 구분하기가 어렵다. -> 우리가 주로 사용하고 있는 것</li>
 <li>Functional Endpoints : 경량화된 람다 기반 함수형 프로그래밍 모델로 annotation controller와 큰 차이점은 application이 요청 시작부터 끝까지 제어한다.<ul>
 <li>어떻게 생겼는지 궁금해서 간단한 예시를 찾아봤다.</li>
 </ul>
@@ -71,7 +71,7 @@ PersonHandler handler = new PersonHandler(repository);
 
 // RouterFunction은 들어오는 요청을 핸들러 함수로 라우팅한다.
 // 라우터 함수가 매칭되면 핸들러 함수를 반환하고, 매칭되는 것이 없으면 빈 Mono를 반환
-RouterFunction&lt;ServerResponse&gt; route = route()
+RouterFunction<ServerResponse> route = route()
     .GET("/person/{id}", accept(APPLICATION_JSON), handler::getPerson)
     .GET("/person", accept(APPLICATION_JSON), handler::listPeople)
     .POST("/person", handler::createPerson)
@@ -86,20 +86,20 @@ public class PersonHandler {
         this.repository = repository;
     }
 
-    public Mono&lt;ServerResponse&gt; listPeople(ServerRequest request) { (1)
-        Flux&lt;Person&gt; people = repository.allPeople();
+    public Mono<ServerResponse> listPeople(ServerRequest request) { (1)
+        Flux<Person> people = repository.allPeople();
         return ok().contentType(APPLICATION_JSON).body(people, Person.class);
     }
 
-    public Mono&lt;ServerResponse&gt; createPerson(ServerRequest request) { (2)
-        Mono&lt;Person&gt; person = request.bodyToMono(Person.class);
+    public Mono<ServerResponse> createPerson(ServerRequest request) { (2)
+        Mono<Person> person = request.bodyToMono(Person.class);
         return ok().build(repository.savePerson(person));
     }
 
-    public Mono&lt;ServerResponse&gt; getPerson(ServerRequest request) { (3)
+    public Mono<ServerResponse> getPerson(ServerRequest request) { (3)
         int personId = Integer.valueOf(request.pathVariable("id"));
         return repository.getPerson(personId)
-            .flatMap(person -&gt; ok().contentType(APPLICATION_JSON).bodyValue(person))
+            .flatMap(person -> ok().contentType(APPLICATION_JSON).bodyValue(person))
             .switchIfEmpty(ServerResponse.notFound().build());
     }
 }</code></pre>
@@ -156,10 +156,10 @@ Reactive pipeline은 구분된 환경에서 data가 sequential하게 처리된�
 </ul>
 <h3 id="webflux에서-성능이-저하되는-원인">WebFlux에서 성능이 저하되는 원인</h3>
 <p>CPU 사용이 많은 작업 및 Blocking IO가 많은 경우
--&gt; runnable 한 thread가 CPU를 점유하고 있으면 이벤트 루프가 이벤트 queue에 있는 작업을 처리할 수 없다.</p>
+-> runnable 한 thread가 CPU를 점유하고 있으면 이벤트 루프가 이벤트 queue에 있는 작업을 처리할 수 없다.</p>
 <h3 id="reactor에서의-backpressure-처리-방식">Reactor에서의 Backpressure 처리 방식</h3>
 <p>앞서 Backpressure는 Publisher가 빠르게 데이터 emit 시 Subscriber의 처리 속도가 느려서 처리되지 못한 데이터가 계속 쌓이는 현상을 해결하려는 것이다.</p>
-<p>방법 1. Subscriber가 처리할 수 있는 수준의 양을 Publisher에게 알려주는 방식 -&gt; subscriber가 이벤트 처리에 주도권을 가진다.
+<p>방법 1. Subscriber가 처리할 수 있는 수준의 양을 Publisher에게 알려주는 방식 -> subscriber가 이벤트 처리에 주도권을 가진다.
 방법2. Backpressure 전략을 사용한다 (버퍼에 가득차면 Exception 발생시키기, 버퍼 밖에 대기하는 데이터 Drop 시키기 등..)</p>
 <p><a href="https://devfunny.tistory.com/914">처리 방식 참고</a></p>
 <h2 id="netty">Netty</h2>
@@ -167,7 +167,7 @@ Reactive pipeline은 구분된 환경에서 data가 sequential하게 처리된�
 <p><img alt="" src="https://velog.velcdn.com/images/kny8092/post/9e786165-56bc-4e7d-a279-376a8eac7e18/image.png" /></p>
 <ol>
 <li>모든 요청은 unique socket으로 전달 받으며 SocketChannel이라고하는 채널과 연결된다.</li>
-<li>단일 Eventloop thread가 SocketChannel과 연관되어있어서 모든 요청은 Socket-&gt;SocketChannel에서 같은 Eventloop로 전달된다.</li>
+<li>단일 Eventloop thread가 SocketChannel과 연관되어있어서 모든 요청은 Socket->SocketChannel에서 같은 Eventloop로 전달된다.</li>
 <li>EventLoop의 요청은 channel pipeline을 통과하며, 여기서 필요한 처리를 위해 다수의 Inbound channel handler 나 WebFilter가 구성된다.</li>
 <li>이후에 Eventloop가 application 코드를 실행시킨다.</li>
 <li>끝나면 Eventloop는 configured processing을 위해 다시 여러 outbound channel handler를 통과한다.</li>

@@ -45,11 +45,11 @@ toc_sticky: true
 <h3 id="내가-겪었던-상황">내가 겪었던 상황</h3>
 <pre><code class="language-java">class MyService{
 
-    public void update(List&lt;Integer&gt; ids){
-        List&lt;Content&gt; contents = externalApi.get(ids);
+    public void update(List<Integer> ids){
+        List<Content> contents = externalApi.get(ids);
         contentRepository.saveAll(contents); // (1)
 
-        List&lt;Picture&gt; pictures = pictureRepository.findAllByIds(ids); // (2)
+        List<Picture> pictures = pictureRepository.findAllByIds(ids); // (2)
         String url = pictures.get(0).getUrl();
         // etc.. (3)
 
@@ -181,7 +181,7 @@ public class OpenEntityManagerInViewInterceptor extends EntityManagerFactoryAcce
     public void preHandle(WebRequest request) throws DataAccessException {
         String key = getParticipateAttributeName();
         WebAsyncManager asyncManager = WebAsyncUtils.getAsyncManager(request);
-        if (asyncManager.hasConcurrentResult() &amp;&amp; applyEntityManagerBindingInterceptor(asyncManager, key)) {
+        if (asyncManager.hasConcurrentResult() && applyEntityManagerBindingInterceptor(asyncManager, key)) {
             return;
         }
 

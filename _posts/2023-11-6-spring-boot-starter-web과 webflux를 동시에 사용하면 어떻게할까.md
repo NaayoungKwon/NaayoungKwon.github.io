@@ -44,7 +44,7 @@ implementation("org.springframework.boot:spring-boot-starter-webflux")</code></p
     threads:
       max: 200 # 생성할 수 있는 thread의 총 개수
       min-spare: 10 # 항상 활성화 되어있는(idle) thread의 개수 (tomcat default는 25개인데, 스프링부트(ServerProperties)에선 10개로 잡았음)
-    accept-count: 100 # 작업 큐의 사이즈 (tomdat default 는 Integer.MAX -&gt; 무한 대기열 전략)</code></pre><ul>
+    accept-count: 100 # 작업 큐의 사이즈 (tomdat default 는 Integer.MAX -> 무한 대기열 전략)</code></pre><ul>
 <li>첫 작업이 들어오면, core size 만큼의 스레드를 생성한다.</li>
 <li>요청이 들어올 때 마다 task queue에 넣는다.</li>
 <li>idle인 thread가 있으면 task queue에서 꺼내 스레드에 작업 할당<ul>
@@ -53,7 +53,7 @@ implementation("org.springframework.boot:spring-boot-starter-webflux")</code></p
 </ul>
 </li>
 <li>task 완료 후 thread는 다시 idle 상태가 된다.</li>
-<li>task queue가 비어있고 core size 이상의 thread가 있으면 그 thread들은 없앤다. -&gt; 스레드 풀을 최대한 core size로 유지하려함</li>
+<li>task queue가 비어있고 core size 이상의 thread가 있으면 그 thread들은 없앤다. -> 스레드 풀을 최대한 core size로 유지하려함</li>
 <li>무한 대기열 전략 : 요청이 아무리 많이들어와도 thread를 늘리지 않고 대기열에 두겠다.</li>
 <li>아래와 같은 상황이라면 어떻게 될까?</li>
 </ul>
@@ -61,7 +61,7 @@ implementation("org.springframework.boot:spring-boot-starter-webflux")</code></p
 A. 5개는 스레드 풀에서 바로 할당받아 사용하고(min-spare) 
    1개는 새로 스레드를 생성하여 할당 받는다 (max)
    1개는 queue에 대기 할 수 있지만 나머지 3개는 reject 당할 것이다.</code></pre><ul>
-<li>지금 spring boot 2.5에 tomcat 9를 사용하고 있는데, 이때 저렇게 설정하고 요청을 보내면 reject 당하지 않는다. 왜일까 -&gt; NIO connector의 등장 (뒤에 나옴)</li>
+<li>지금 spring boot 2.5에 tomcat 9를 사용하고 있는데, 이때 저렇게 설정하고 요청을 보내면 reject 당하지 않는다. 왜일까 -> NIO connector의 등장 (뒤에 나옴)</li>
 </ul>
 <h3 id="tomcat-connector">Tomcat Connector</h3>
 <blockquote>
@@ -71,7 +71,7 @@ A. 5개는 스레드 풀에서 바로 할당받아 사용하고(min-spare)
 <pre><code>출처 https://velog.io/@jihoson94/BIO-NIO-Connector-in-Tomcat</code></pre><ul>
 <li>버전마다 Connector의 동작 방식에는 차이가 있고, BIO, NIO, NIO2가 있다.</li>
 <li>NIO는 New I/O의 약자 (Blocking, Non blocking 모두 지원)</li>
-<li>회사에서 spring boot 2.5.15를 사용하고 있고, maven에서 찾아보니 Tomcat 9 버전을 사용함을 알 수 있었다. -&gt; NIO</li>
+<li>회사에서 spring boot 2.5.15를 사용하고 있고, maven에서 찾아보니 Tomcat 9 버전을 사용함을 알 수 있었다. -> NIO</li>
 <li>BIO는 tomcat 8 부터 deprecated</li>
 </ul>
 <h4 id="bio-connector">BIO Connector</h4>
@@ -168,7 +168,7 @@ A. 5개는 스레드 풀에서 바로 할당받아 사용하고(min-spare)
 <hr />
 <p>참고
 그림은  <a href="https://excalidraw.com/">https://excalidraw.com/</a> 에서 직접
-<a href="https://www.stefankreidel.io/blog/spring-webmvc-with-webclient">https://www.stefankreidel.io/blog/spring-webmvc-with-webclient</a> -&gt; 여기 그림이 유용함
+<a href="https://www.stefankreidel.io/blog/spring-webmvc-with-webclient">https://www.stefankreidel.io/blog/spring-webmvc-with-webclient</a> -> 여기 그림이 유용함
 <a href="https://www.stefankreidel.io/blog/spring-webflux">https://www.stefankreidel.io/blog/spring-webflux</a>
 <a href="https://singhkaushal.medium.com/spring-webflux-eventloop-vs-thread-per-request-model-a42d07ee8502">https://singhkaushal.medium.com/spring-webflux-eventloop-vs-thread-per-request-model-a42d07ee8502</a>
 <a href="https://sihyung92.oopy.io/spring/1">https://sihyung92.oopy.io/spring/1</a>

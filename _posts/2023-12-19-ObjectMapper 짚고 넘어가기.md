@@ -42,9 +42,9 @@ objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false
 <h3 id="정의하기">정의하기</h3>
 <p>Custom serializer와 deserializer는 input이나 output JSON 응답으로 직렬화 역직렬화 되어야하는 경우에 유용하다.
 다음은 Deserialize 예시로 추상 클래스인 StdDeserializer를 상속받는다.</p>
-<pre><code class="language-java">public class AnimalStdDeserializer extends StdDeserializer&lt;Animal&gt; {
+<pre><code class="language-java">public class AnimalStdDeserializer extends StdDeserializer<Animal> {
 
-    protected AnimalStdDeserializer(Class&lt;?&gt; vc) {
+    protected AnimalStdDeserializer(Class<?> vc) {
         super(vc);
     }
 
@@ -93,23 +93,23 @@ public class Cage {
 createContextual method를 overriding하여 역직렬화에 필요한 정보를 추출해 Deserialize 인스턴스를 생성하도록 한다.</p>
 <pre><code class="language-java">public interface ContextualDeserializer
 {
-    public JsonDeserializer&lt;?&gt; createContextual(DeserializationContext ctxt,
+    public JsonDeserializer<?> createContextual(DeserializationContext ctxt,
             BeanProperty property)
         throws JsonMappingException;
 }</code></pre>
-<pre><code class="language-java">public class WrapperDeserializer extends JsonDeserializer&lt;Wrapper&lt;?&gt;&gt; implements ContextualDeserializer {
+<pre><code class="language-java">public class WrapperDeserializer extends JsonDeserializer<Wrapper<?>> implements ContextualDeserializer {
 
     private JavaType type;
 
     @Override // ContextualDeserializer override
-    public JsonDeserializer&lt;?&gt; createContextual(DeserializationContext ctxt, BeanProperty property) {
+    public JsonDeserializer<?> createContextual(DeserializationContext ctxt, BeanProperty property) {
         this.type = property.getType().containedType(0);
         return this;
     }
 
     @Override // JsonDeserializer override
-    public Wrapper&lt;?&gt; deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
-        Wrapper&lt;?&gt; wrapper = new Wrapper&lt;&gt;();
+    public Wrapper<?> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+        Wrapper<?> wrapper = new Wrapper<>();
         wrapper.setValue(deserializationContext.readValue(jsonParser, type));
         return wrapper;
     }
@@ -140,7 +140,7 @@ Spring Boot는 default로 다음 설정을 disable 시켜뒀다.</p>
 <h3 id="default-objectmapper를-customize-하는-방법">Default ObjectMapper를 Customize 하는 방법</h3>
 <ol>
 <li><p>application property를 수정하기</p>
-<pre><code>spring.jackson.&lt;category_name&gt;.&lt;feature_name&gt;=true,false</code></pre><p>단점 : 세부적으로 custom하기는 어렵다.</p>
+<pre><code>spring.jackson.<category_name>.<feature_name>=true,false</code></pre><p>단점 : 세부적으로 custom하기는 어렵다.</p>
 </li>
 <li><p>module을 Bean으로 등록한다.</p>
 <pre><code class="language-java">@Configuration
@@ -164,7 +164,7 @@ functional interface를 사용하는 방법으로, default OBjectMapper를 Jacks
 ```java
 @Bean
 public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
-    return builder -&gt; builder.serializationInclusion(JsonInclude.Include.NON_NULL)
+    return builder -> builder.serializationInclusion(JsonInclude.Include.NON_NULL)
       .serializers(LOCAL_DATETIME_SERIALIZER);
 }</code></pre><p>또 다른 예시로 @JsonFormat을 응답 객체에 매번 붙여두지 않고 공통적인 형식을 지정하는 용도로 사용할 수 있다.
 <a href="https://addio3305.tistory.com/101">참고</a></p>

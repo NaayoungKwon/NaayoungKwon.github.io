@@ -34,7 +34,7 @@ config 파일을 생성한다.</p>
 <p>여기서 3개의 설정을 해주고있다.</p>
 <ol>
 <li>socket 최초 연결을 위한 path 설정 : <code>registry.addEndpoint("/ws-market")</code></li>
-<li>client -&gt; server로 요청(pub)이 들어올 prefix path 설정 : <code>config.setApplicationDestinationPrefixes</code></li>
+<li>client -> server로 요청(pub)이 들어올 prefix path 설정 : <code>config.setApplicationDestinationPrefixes</code></li>
 <li>client가 listen(구독)할 path prefix path 설정 : <code>config.enableSimpleBroker</code></li>
 </ol>
 <pre><code class="language-java">@Configuration
@@ -49,7 +49,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.setApplicationDestinationPrefixes("/order"); // client -&gt; server
+        config.setApplicationDestinationPrefixes("/order"); // client -> server
         config.enableSimpleBroker("/topic","/queue"); // 구독 요청
     }
 
@@ -61,8 +61,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 <h3 id="messagemapping">MessageMapping</h3>
 <p>위의 2번의 path로 client가 server로 data를 전달했을 때 맵핑을 해서 처리해준다. controller mapping으로 보면 될 것 같다.</p>
 <p>설정파일에서 prefix를 <code>/order</code> 로 설정했고, 밑의 파일에서 MessageMapping을 <code>/purchase</code>로 지정했다. 
--&gt; <code>/order/purchase</code> 로 client가 요청이 오면 해당 메소드로 라우팅된다.
--&gt; 비지니스 로직 처리 후에 <code>/topic/market/{marketId}</code> (예시 /topic/market/1) 을 listen (구독) 하고 있는 클라이언트들에게 전부 전달한다.</p>
+-> <code>/order/purchase</code> 로 client가 요청이 오면 해당 메소드로 라우팅된다.
+-> 비지니스 로직 처리 후에 <code>/topic/market/{marketId}</code> (예시 /topic/market/1) 을 listen (구독) 하고 있는 클라이언트들에게 전부 전달한다.</p>
 <pre><code class="language-java">@RestController
 @RequiredArgsConstructor
 @Slf4j

@@ -21,7 +21,7 @@ toc_sticky: true
 <p>데이터 피드의 분산 스트리밍, 파이프 라이닝 및 재생을 위한 실시간 스트리밍 데이터를 처리하기 위한 목적으로 설계된 오픈 소스 분산형 게시-구독 메시징 플랫폼이다.</p>
 <p>Producer가 Data를 생산하는 주체로, STOMP의 requester에게 받은 data를 처리해서 Cosumenr쪽으로 던진다.
 Consumer가 Data를 꺼내쓰는 주체로, STOMP의 구독자에게 전달하는 주체 개념을 알고 넘어간다.</p>
-<p>저장되는 데이터 : Topic &gt; Partition &gt; Record로 구성되어 있다.
+<p>저장되는 데이터 : Topic > Partition > Record로 구성되어 있다.
 Topic이 하나의 DB Table이고 Record가 실제 한 column 이라고 생각한 뒤, 코드 돌려보며 흐름을 파악하고 다시 개념을 잡으면 이해가 더 와닿았던 것 같다.</p>
 <p><img alt="" src="https://velog.velcdn.com/images/kny8092/post/3d2f81a7-ec4b-4325-891e-3fca4229a41a/image.png" /></p>
 <h1 id="코드에-적용하기">코드에 적용하기</h1>
@@ -91,7 +91,7 @@ KAFKA_ADVERTISED_LISTENERS 에서 app이 통신할 kafka broker를 알려줬다.
 <p>나는 stomp 프로토콜로 받은 정보를 가지고 kafka record를 생성해 전달하는 것을 만들었다.
 비지니스 로직은 실제로 작성한 것과 조금 다르지만 producer부분만 유의해서 보자.</p>
 <ul>
-<li>producer (controller) : client -&gt; server 로 요청이 올 때 path에 따라 처리할 로직</li>
+<li>producer (controller) : client -> server 로 요청이 올 때 path에 따라 처리할 로직</li>
 </ul>
 <p>build.gradle 추가할 의존성</p>
 <pre><code class="language-gradle">implementation 'org.springframework.kafka:spring-kafka'</code></pre>
@@ -102,13 +102,13 @@ KAFKA_ADVERTISED_LISTENERS 에서 app이 통신할 kafka broker를 알려줬다.
 public class KafkaProducerConfig {
 
     @Bean
-    public ProducerFactory&lt;String, MessageDto&gt; producerFactory() {
-        return new DefaultKafkaProducerFactory&lt;&gt;(kafkaProducerConfiguration());
+    public ProducerFactory<String, MessageDto> producerFactory() {
+        return new DefaultKafkaProducerFactory<>(kafkaProducerConfiguration());
     }
 
     @Bean
-    public Map&lt;String, Object&gt; kafkaProducerConfiguration() {
-        return ImmutableMap.&lt;String, Object&gt;builder()
+    public Map<String, Object> kafkaProducerConfiguration() {
+        return ImmutableMap.<String, Object>builder()
                 .put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConstants.BROKER)
                 .put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class)
                 .put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class)
@@ -116,8 +116,8 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate&lt;String, MessageDto&gt; kafkaTemplate() {
-        return new KafkaTemplate&lt;&gt;(producerFactory());
+    public KafkaTemplate<String, MessageDto> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
     }
 }</code></pre>
 <ul>
@@ -137,7 +137,7 @@ public class KafkaProducerConfig {
 @RequiredArgsConstructor
 @Slf4j
 public class OrderController {
-    private final KafkaTemplate&lt;String, MessageDto&gt; kafkaTemplate;
+    private final KafkaTemplate<String, MessageDto> kafkaTemplate;
 
     @MessageMapping("/purchase") //   url : "order/purchase" 로 들어오는 정보 처리
     public void purchase(MessageDto message){
@@ -155,21 +155,21 @@ public class OrderController {
 public class KafkaConsumerConfig {
 
     @Bean
-    ConcurrentKafkaListenerContainerFactory&lt;String, MessageDto&gt; kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory&lt;String, MessageDto&gt; factory = new ConcurrentKafkaListenerContainerFactory&lt;&gt;();
+    ConcurrentKafkaListenerContainerFactory<String, MessageDto> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, MessageDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }
 
     @Bean
-    public ConsumerFactory&lt;String, MessageDto&gt; consumerFactory() {
-        return new DefaultKafkaConsumerFactory&lt;&gt;(consumerConfigurations(), new StringDeserializer(), new JsonDeserializer&lt;&gt;(MessageDto.class));
+    public ConsumerFactory<String, MessageDto> consumerFactory() {
+        return new DefaultKafkaConsumerFactory<>(consumerConfigurations(), new StringDeserializer(), new JsonDeserializer<>(MessageDto.class));
     }
 
     @Bean
-    public Map&lt;String, Object&gt; consumerConfigurations() 
+    public Map<String, Object> consumerConfigurations() 
 
-        return ImmutableMap.&lt;String, Object&gt;builder()
+        return ImmutableMap.<String, Object>builder()
                 .put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConstants.BROKER)
                 .put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringSerializer.class)
                 .put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializer)
@@ -184,7 +184,7 @@ public class KafkaConsumerConfig {
 <li>KEY_DESERIALIZER_CLASS_CONFIG : key 설정</li>
 <li>VALUE_DESERIALIZER_CLASS_CONFIG : value 설정</li>
 <li>GROUP_ID_CONFIG : consumer group 설정</li>
-<li>AUTO_OFFSET_RESET_CONFIG : consumer가 연결되고 나서 broker가 가진 partion에서 어떤 offset 부터 확인할지 (latest : 연결 이후 들어온 값만 소비. earliest : 무조건 partition의 제일 앞부터 확인해서 소비) -&gt; 옵션은 카프카를 사용하는 목적에 따라 설정을 맞게 하면된다.</li>
+<li>AUTO_OFFSET_RESET_CONFIG : consumer가 연결되고 나서 broker가 가진 partion에서 어떤 offset 부터 확인할지 (latest : 연결 이후 들어온 값만 소비. earliest : 무조건 partition의 제일 앞부터 확인해서 소비) -> 옵션은 카프카를 사용하는 목적에 따라 설정을 맞게 하면된다.</li>
 </ul>
 <h3 id="consumer의-topic-처리-파일">Consumer의 topic 처리 파일</h3>
 <pre><code class="language-java">@Component

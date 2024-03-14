@@ -155,6 +155,7 @@ exchange.invoke(price);
 
 - type token : 타입 정보를 값으로 넘기겠다.
 - Class 타입은 Generic type이 가지고 있는 type parameter에 대한 정보를 알 수 없다. 
+
 ```java
 public get (Class<T> clazz){ }
 

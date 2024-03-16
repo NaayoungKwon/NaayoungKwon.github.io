@@ -3,11 +3,11 @@ main:
   - title: "Home"
     url: https://naayoungkwon.github.io/
 
-  - title: "About"
-    url: /about/
-
   - title: "Categories"
     url: /categories/
+
+# - title: "About"
+#     url: /about/
 
   - title: "GitHub"
     url: https://github.com/naayoungkwon
@@ -27,13 +27,9 @@ categories:
         url: /categories/wealth-marble/
   - title: "Java & Spring"
     url: /categories/java-spring/
-  - title: "Effective Java"
-    url: /categories/effective-java/
   - title: "Real MySQL"
     url: /categories/real-mysql/
   - title: "Unit Test"
     url: /categories/unit-test/
-  - title: "Modern JavaScript Deep Dive"
-    url: /categories/modern-javascript/
   - title: "ETC"
     url: /categories/etc/

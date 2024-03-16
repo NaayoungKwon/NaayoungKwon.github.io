@@ -3,7 +3,8 @@ date: 2024-01-12
 title: "영속성은 @Transactional 에서만 유지될까"
 category :
   - Java & Spring
-permalink: Transaction 밖에서도 계속 select + update query가 발생해 찾아보던 중 OSIV에 대해 알게되어 공부하고, on/off 여부에 따른 평균 응답 시간 개선까지 확인한 것을 정리했다.
+permalink: /java-spring/영속성은 @Transactional 에서만 유지될까/
+excerpt: Transaction 밖에서도 계속 select + update query가 발생해 찾아보던 중 OSIV에 대해 알게되어 공부하고, on/off 여부에 따른 평균 응답 시간 개선까지 확인한 것을 정리했다.
 
 toc: true
 toc_sticky: true

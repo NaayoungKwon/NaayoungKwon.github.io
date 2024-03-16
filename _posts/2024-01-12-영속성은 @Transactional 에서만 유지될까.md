@@ -3,7 +3,7 @@ date: 2024-01-12
 title: "영속성은 @Transactional 에서만 유지될까"
 category :
   - Java & Spring
-permalink: /java-spring/영속성은 @Transactional 에서만 유지될까/
+permalink: Transaction 밖에서도 계속 select + update query가 발생해 찾아보던 중 OSIV에 대해 알게되어 공부하고, on/off 여부에 따른 평균 응답 시간 개선까지 확인한 것을 정리했다.
 
 toc: true
 toc_sticky: true
@@ -76,6 +76,7 @@ OSIV로 인해 영속성 컨텍스트가 살아있다면, (1) 이후에 (2), (3)
 
 
 참고로 OSIV는 default true로 되어있다.
+
 ### 스프링 OSIV의 단점
 
 - 같은 영속성 컨텍스를 여러 트랜잭션이 공유할 수 있다는 점을 주의해야한다.
@@ -84,6 +85,24 @@ OSIV로 인해 영속성 컨텍스트가 살아있다면, (1) 이후에 (2), (3)
 - 영속성 컨텍스트가 사라지면서 DB connection을 반환하는데, 너무 오랜시간 데이터베이스 커넥션을 사용하면서 커넥션이 전체적으로 부족할 수 있다.
   - 요청이 많지 않은 간단한 서비스나 커넥션을 많이 사용하지 않은 곳에서는 OSIV true
   - 실시간 서비스에서는 OSIV false를 권장
+
+### OSIV 설정 여부에 따른 응답 시간 차이
+
+이론 상으로 커넥션 부족으로 인해 실시간 서비스에서 false로 쓴다고 하는데 지금 on으로 쓰고 있어서, 실제 다른 회사에서는 어떻게 쓰는지가 궁금했다.
+OSIV를 꺼보고 싶은데, 정말 마~~침 부하 테스트를 해보다가 응답이 밀려서 평균 응답 시간이 길어지는 현상이 있었다.
+
+독립 요청 당 처리 시간도 긴 API에 대해서 지속적으로 요청을 보냈을 때 다음과 같이 Exception이 발생했다.
+
+```log
+Could not open JPA EntityManager for transaction; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to acquire JDBC Connection
+```
+
+실험해보고 싶은게 마침 Exception으로 발생해서 실험해볼 빌미가 생겼다.
+connection을 늘리는 방법으로도 어느정도 해소되었지만, connection이 부족한 stage 환경에서 다른 설정은 동일하게 두고 OSIV on/off로만 시간을 측정했을 때 3배 이상의 차이가 발생했다.
+
+|OSIV on|OSIV off|
+|-|-|
+|5s|16s|
 
 ## OSIV 구현 열어보기
 
@@ -115,6 +134,7 @@ OSIV로 인해 영속성 컨텍스트가 살아있다면, (1) 이후에 (2), (3)
 
 #### JpaBaseConfiguration
 - `spring.jpa.open-in-view`가 true인 경우 아래 Configuration에서 **OpenEntityManagerInViewInterceptor**를 빈으로 생성하고 Interceptor에 등록하는 부분이 나온다.
+
 ```java
  
 @Configuration(proxyBeanMethods = false)
@@ -242,6 +262,7 @@ public class OpenEntityManagerInViewInterceptor extends EntityManagerFactoryAcce
 
 ### 실행 로그
 - 위의 코드에서 debug, warn으로 나오는 부분이 처음 실행 때, 요청이 들어오고 끝났을 때 로그로 남는다.
+
 ```
 2024-01-15 18:55:10.486 DEBUG 12132 --- [  restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'openEntityManagerInViewInterceptorConfigurer'
 2024-01-15 18:55:10.486 DEBUG 12132 --- [  restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration'
